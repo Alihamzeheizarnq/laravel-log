@@ -1,0 +1,5 @@
+order-service - [17/Sep/2022:10:29:10] "POST /orders HTTP/1.1" 200
+order-service - [17/Sep/2022:10:29:10] "POST /orders HTTP/1.1" 200
+order-service - [17/Sep/2022:10:29:10] "POST /orders HTTP/1.1" 200
+order-service - [17/Sep/2022:10:29:10] "POST /orders HTTP/1.1" 200
+order-service - [17/Sep/2022:10:29:10] "POST /orders HTTP/1.1" 200

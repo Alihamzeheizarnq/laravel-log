@@ -48,6 +48,4 @@ class ProcessLogs extends Command
 
         return Command::SUCCESS;
     }
-
-
 }
