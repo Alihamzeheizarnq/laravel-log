@@ -2,9 +2,9 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Log;
 use App\Services\File;
 use App\Services\formats\LogFormat;
-use Generator;
 use Illuminate\Console\Command;
 
 class ProcessLogs extends Command
@@ -38,12 +38,13 @@ class ProcessLogs extends Command
 
         $fileProcess = new File();
 
-        foreach ($fileProcess->read($file) as $key => $value) {
-            $logFormatter = new LogFormat($value);
-
-            $logFormatter->formatted();
+        try {
+            foreach ($fileProcess->read($file) as $value) {
+                Log::saveLog(new LogFormat($value));
+            }
+        } finally {
+            $this->info('The command was successful!');
         }
-
 
         return Command::SUCCESS;
     }

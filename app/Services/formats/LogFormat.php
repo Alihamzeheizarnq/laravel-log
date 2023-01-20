@@ -23,13 +23,15 @@ class LogFormat implements LogInterface
      */
     public function formatted(): array
     {
-        $item = explode(' ', $this->text);
-
+        $item = explode(' ', str_replace(['"'], [''], $this->text));
         unset($item[1]);
 
         $item = array_combine($this->columns(), $item);
 
-        [$day, $month, $year, $hour, $minutes, $seconds] = sscanf($item['created_at'], "[%d/%3s/%d:%d:%d:%d]");
+        [$day, $month, $year, $hour, $minutes, $seconds] = sscanf(
+            $item['created_at'],
+            "[%[^/]/%[^/]/%[^:]:%[^:]:%[^:]:%[^]]"
+        );
 
         $month = Carbon::parse($month)->format('m');
 
@@ -49,7 +51,7 @@ class LogFormat implements LogInterface
             'name',
             'created_at',
             'method',
-            'url',
+            'path',
             'protocol',
             'status'
         ];
