@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\LogController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -18,4 +19,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-//Route::get('/logs/count')
+Route::get('/logs/count', [LogController::class, 'getLogs']);
