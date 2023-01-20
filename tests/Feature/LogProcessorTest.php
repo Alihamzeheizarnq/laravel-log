@@ -90,6 +90,8 @@ class LogProcessorTest extends TestCase
 
         $this->assertArrayHasKey('count', $response->original);
         $this->assertEquals(10, $response->original['count']);
+
+        unlink('logs.txt');
     }
 
     /**
@@ -118,6 +120,8 @@ class LogProcessorTest extends TestCase
 
         $this->assertArrayHasKey('count', $response->original);
         $this->assertEquals(5, $response->original['count']);
+
+        unlink('logs.txt');
     }
 
 }
