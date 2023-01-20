@@ -20,16 +20,16 @@ class LogController extends Controller
         $logQuery = Log::query();
 
         $logsCount = $logQuery->when($request->has('serviceNames'), function ($query) use ($request) {
-            $names = $request->has('serviceNames');
+            $names = $request->get('serviceNames');
             $names = is_array($names) ? $names : [$names];
 
             return $query->whereIn('name', $names);
         })->when($request->has('statusCode'), function ($query) use ($request) {
             return $query->where('status', $request->statusCode);
         })->when($request->has('startDate') and $request->has('endDate'), function ($query) use ($request) {
-            return $query->where('created_at', '>', $request->startDate)->where(
+            return $query->where('created_at', '>=', $request->startDate)->where(
                 'created_at',
-                '<',
+                '<=',
                 $request->endDate
             );
         })->count();
